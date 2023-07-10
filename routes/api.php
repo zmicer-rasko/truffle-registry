@@ -1,7 +1,11 @@
 <?php
 
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TruffleController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/token', [ApiController::class, 'token']);
-Route::get('/register-truffle', [ApiController::class, 'registerTruffle']);
+Route::post('/token', [AuthController::class, 'token']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/register-truffle', [TruffleController::class, 'registerTruffle']);
+});
